@@ -1,18 +1,31 @@
 //named-function
-//  document.querySelectorAll(".drum")[0].addEventListener("click",handleclick);
+// document.querySelectorAll(".drum")[0].addEventListener("click",handleclick);
 // function handleclick(){
 //     alert("I got clicked!");
 // }
 
 // anonymous function
 var numberOfDrumButton=document.querySelectorAll(".drum").length;
-for(var i=0;i<numberOfDrumButton;i++)
+for(var i=0;i<numberOfDrumButton;i++){
 document.querySelectorAll(".drum")[i].addEventListener("click",function(){
     // alert("I got clicked!");
     // this->to select clicked one
     // this.style.color="white";
     var buttonInnerHtml=this.innerHTML;
-    switch (buttonInnerHtml) {
+     //Detecting key clicked
+    makesound(buttonInnerHtml);
+    buttonAnimation(buttonInnerHtml);
+});
+} 
+ 
+document.addEventListener("keypress",function(Event){
+    //Detecting key-board button press
+    makesound(Event.key);
+    buttonAnimation(Event.key);
+});
+
+function makesound(key){
+    switch (key) {
         case 'w':
             var tom1=new Audio("sounds/tom-1.mp3");
             tom1.play();
@@ -47,7 +60,18 @@ document.querySelectorAll(".drum")[i].addEventListener("click",function(){
             console.log("no sound");
            
     }
-});
+}
+
+function buttonAnimation(currentKey){
+    var activeButton = document.querySelector("."+currentKey);
+
+    activeButton.classList.add("pressed");
+
+    setTimeout(function(){
+        activeButton.classList.remove("pressed");
+    },100);
+}
+
 // var audio=new Audio("sounds/tom-1.mp3");
 //     audio.play();
 // higher order function
@@ -70,3 +94,30 @@ document.querySelectorAll(".drum")[i].addEventListener("click",function(){
 // function calculator(num1,num2,operator){
 //     return operator(num1,num2);
 // }
+
+
+
+
+
+
+// callback function:-
+
+// function anotherAddEventListener(typeOfEvent,callback) {
+//     //Detect Event Code....
+    
+//     var eventThatHappened={
+//     eventType:"keypress",
+//     key:"P",
+//     durationOfKeyPress:2
+//     }
+    
+//     if(eventThatHappened.eventType===typeOfEvent){
+//     callback(eventThatHappened);
+//     }
+    
+// }
+
+// anotherAddEventListener("keypress",function (event){
+//     console.log(event);
+// });
+    
